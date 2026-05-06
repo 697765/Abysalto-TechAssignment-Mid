@@ -1,4 +1,5 @@
 ﻿using AbySalto.Mid.Application.Authorization;
+using AbySalto.Mid.Application.Cart;
 using AbySalto.Mid.Application.Product;
 using AbySalto.Mid.Domain.Entities;
 using AbySalto.Mid.Domain.Interfaces;
@@ -36,6 +37,8 @@ namespace AbySalto.Mid.Infrastructure
 
             services.AddCacheProductApi(configuration);
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+
             return services;
         }
 
