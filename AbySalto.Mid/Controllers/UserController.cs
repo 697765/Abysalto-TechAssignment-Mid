@@ -28,5 +28,16 @@ namespace AbySalto.Mid.WebApi.Controllers
                 return BadRequest(result.ValidationErrors);
             return Ok(new { message = $"User {registrationRequest.Username} created successfully" });
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
+        {
+            var result = await _authService.LoginAsync(loginRequest.Email, loginRequest.Password);
+
+            if (!result.IsSuccess)
+                return Unauthorized(result.ValidationErrors);
+
+            return Ok(new { token = result.SuccessMessage });
+        }
     }
 }

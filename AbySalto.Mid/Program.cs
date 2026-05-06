@@ -15,7 +15,6 @@ namespace AbySalto.Mid
                 .AddApplication()
                 .AddInfrastructure(builder.Configuration);
 
-            builder.Services.AddControllers();
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
@@ -32,7 +31,7 @@ namespace AbySalto.Mid
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
