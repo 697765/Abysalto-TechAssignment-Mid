@@ -10,6 +10,7 @@ namespace AbySalto.Mid.Infrastructure.Persistance
             : base(options)
         { }
 
+        public DbSet<UserProductFavorite> UserProductFavorites => Set<UserProductFavorite>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
