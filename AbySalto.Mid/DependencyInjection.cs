@@ -1,4 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using AbySalto.Mid.WebApi.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.OpenApi.Models;
 
 namespace AbySalto.Mid
 {
@@ -13,6 +16,8 @@ namespace AbySalto.Mid
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AbySalto", Version = "v1" });
             });
+            services.AddValidatorsFromAssemblyContaining<RegistrationRequestValidator>();
+            services.AddFluentValidationAutoValidation();
 
             return services;
         }
