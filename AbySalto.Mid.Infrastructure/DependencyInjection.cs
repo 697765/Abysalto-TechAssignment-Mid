@@ -1,7 +1,9 @@
 ﻿using AbySalto.Mid.Application.Authorization;
 using AbySalto.Mid.Application.Product;
 using AbySalto.Mid.Domain.Entities;
+using AbySalto.Mid.Domain.Interfaces;
 using AbySalto.Mid.Infrastructure.Persistance;
+using AbySalto.Mid.Infrastructure.Repository;
 using AbySalto.Mid.Infrastructure.Services;
 using AbySalto.Mid.Infrastructure.Services.Products;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,6 +35,7 @@ namespace AbySalto.Mid.Infrastructure
             });
 
             services.AddCacheProductApi(configuration);
+            services.AddScoped<IFavoriteRepository, FavoriteRepository>();
             return services;
         }
 
