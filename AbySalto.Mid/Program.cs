@@ -1,6 +1,6 @@
-
 using AbySalto.Mid.Application;
 using AbySalto.Mid.Infrastructure;
+using AbySalto.Mid.WebApi.Middlewares;
 
 namespace AbySalto.Mid
 {
@@ -34,6 +34,7 @@ namespace AbySalto.Mid
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.MapControllers();
 
