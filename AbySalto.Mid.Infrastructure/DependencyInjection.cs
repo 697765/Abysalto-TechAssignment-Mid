@@ -1,7 +1,9 @@
 ﻿using AbySalto.Mid.Application.Authorization;
+using AbySalto.Mid.Application.Product;
 using AbySalto.Mid.Domain.Entities;
 using AbySalto.Mid.Infrastructure.Persistance;
 using AbySalto.Mid.Infrastructure.Services;
+using AbySalto.Mid.Infrastructure.Services.Products;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,8 @@ namespace AbySalto.Mid.Infrastructure
             {
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddCacheProductApi(configuration);
             return services;
         }
 
@@ -67,6 +71,16 @@ namespace AbySalto.Mid.Infrastructure
 
             return services;
         }
+
+        private static IServiceCollection AddCacheProductApi(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddMemoryCache();
+
+            services.AddHttpClient<IProductGateway, ProductGateway>(client =>
+            {
+                client.BaseAddress = new Uri(configuration["WebApi"]);
+            });
+
             return services;
         }
     }
