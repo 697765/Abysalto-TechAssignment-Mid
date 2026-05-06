@@ -37,5 +37,22 @@ namespace AbySalto.Mid.Infrastructure.Services
 
             return Result.SuccessWithMessage(token);
         }
+
+        public async Task<ApplicationUser?> GetCurrentUserAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                return null;
+
+            return new ApplicationUser
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Name = user.Name,
+                Surname = user.Surname
+            };
+        }
     }
 }
