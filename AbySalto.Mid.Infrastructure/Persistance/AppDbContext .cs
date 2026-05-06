@@ -11,6 +11,9 @@ namespace AbySalto.Mid.Infrastructure.Persistance
         { }
 
         public DbSet<UserProductFavorite> UserProductFavorites => Set<UserProductFavorite>();
+        public DbSet<Cart> Carts => Set<Cart>();
+        public DbSet<CartItem> CartItems => Set<CartItem>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
