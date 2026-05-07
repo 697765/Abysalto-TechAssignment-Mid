@@ -58,6 +58,28 @@ namespace AbySalto.Mid.Application.Cart
 
             return await Map(cart);
         }
+
+        public async Task<Result<CartDto>> RemoveFromCartAsync(string userId, int productId)
+        {
+            var cart = await _cartRepository.GetByUserIdAsync(userId);
+
+            if (cart == null)
+                return Result.Invalid(new ValidationError("Cart not found"));
+
+            try
+            {
+                cart.RemoveItem(productId);
+            }
+            catch (DomainException ex)
+            {
+                return Result.Invalid(new ValidationError(ex.Message));
+            }
+
+            await _cartRepository.SaveAsync(cart);
+
+            return await Map(cart);
+        }
+
         private async Task<CartDto> Map(Entity.Cart cart)
         {
             var dto = new CartDto

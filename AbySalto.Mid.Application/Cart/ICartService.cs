@@ -6,5 +6,6 @@ namespace AbySalto.Mid.Application.Cart
     {
         Task<CartDto> GetCartAsync(string userId);
         Task<Result<CartDto>> AddToCartAsync(string userId, AddToCartRequest request);
+        Task<Result<CartDto>> RemoveFromCartAsync(string userId, int productId);
     }
 }

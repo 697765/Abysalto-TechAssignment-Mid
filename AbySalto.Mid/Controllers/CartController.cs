@@ -36,5 +36,13 @@ namespace AbySalto.Mid.Controllers
                 return BadRequest(result.ValidationErrors);
             return Ok(result);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> Remove(int productId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return Ok(await _service.RemoveFromCartAsync(userId, productId));
+        }
     }
 }
