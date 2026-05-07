@@ -24,5 +24,17 @@ namespace AbySalto.Mid.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return Ok(await _service.GetCartAsync(userId));
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost]
+        public async Task<IActionResult> Add(AddToCartRequest request)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _service.AddToCartAsync(userId, request);
+            if (!result.IsSuccess)
+                return BadRequest(result.ValidationErrors);
+            return Ok(result);
+        }
     }
 }

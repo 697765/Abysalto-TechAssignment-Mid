@@ -21,5 +21,13 @@ namespace AbySalto.Mid.Infrastructure.Repository
                 .Include(x => x.Items)
                 .FirstOrDefaultAsync(x => x.UserId == userId);
         }
+
+        public async Task SaveAsync(Cart cart)
+        {
+            if (cart.Id == 0)
+                _context.Carts.Add(cart);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

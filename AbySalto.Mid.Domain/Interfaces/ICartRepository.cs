@@ -5,5 +5,6 @@ namespace AbySalto.Mid.Application.Cart
     public interface ICartRepository
     {
         Task<Entity.Cart?> GetByUserIdAsync(string userId);
+        Task SaveAsync(Entity.Cart cart);
     }
 }
